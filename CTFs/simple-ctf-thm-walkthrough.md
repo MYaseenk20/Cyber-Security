@@ -10,7 +10,7 @@ I’ve been learning ethical hacking for almost three months now, and the journe
 
 
 ## Simple CTF
-![Desktop View](CTFs/assets/simple-ctf-thm-walkthrough/first_ctf.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/first_ctf.png)
 
 Today, we're diving into a Linux machine in a Capture The Flag (CTF) style challenge.
 This exercise involves not only gaining initial access but also performing privilege escalation to reach root-level access.
@@ -22,7 +22,7 @@ To begin the enumeration process, I ran a basic Nmap scan to identify open ports
 ```bash
 $ nmap -sC -sV TARGET_IP
 ```
-![Desktop View](/assets/nmap_scan.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/nmap_scan.png)
 
 *The Nmap scan revealed two open ports under 1000 — port 21 (FTP) and port 80 (HTTP).*
 
@@ -41,11 +41,11 @@ Based on the Nmap scan, port 80 is open, indicating that a web server is running
 ```bash
 $ : gobuster dir -u http://MACHINE-IP/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt
 ```
-![Desktop View](/assets/gobuster.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/gobuster.png)
 
 As you can see, I discovered a page at /simple. Let's check it out. After exploring the website further, I came across a page that revealed the CMS version: 2.2.8. A quick Google search revealed that this version has known vulnerabilities.
 
-![Desktop View](/assets/cms.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/cms.png)
 
 *Q3: What's the CVE you're using against the application?*
 
@@ -59,7 +59,7 @@ After a bit of searching, I found this.
 ```bash
 $ searchsploit cms made simple
 ```
-![Desktop View](/assets/searchsploit.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/searchsploit.png)
 
 I came across the file php/webapps/46635.py. Let's take a closer look at what it does.
 
@@ -69,7 +69,7 @@ $ python 46635.py -u http://TARGET-IP/simple/ --crack -w /usr/share/wordlists/ro
 
 After resolving a few Python-related errors, I was able to run the script successfully. The result was as follows:
 
-![Desktop View](/assets/webapps.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/webapps.png)
 
 *Q4: What's the password?*
 *A4: secret*
@@ -79,7 +79,7 @@ Let’s attempt to log in to the server via SSH.
 $ ssh mitch@TARGET-IP -p 2222
 ```
 
-![Desktop View](/assets/ssh.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/ssh.png)
 
 And here we go — we've successfully retrieved the user.txt flag.
 
@@ -88,7 +88,7 @@ And here we go — we've successfully retrieved the user.txt flag.
 *A5: G00d j0b, keep up!*
 
 
-![Desktop View](/assets/other_user.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/other_user.png)
 *Q6: Is there any other user in the home directory? What's its name?*
 
 *A6:sunbath*
@@ -104,7 +104,7 @@ $ sudo vim -c ":!/bin/sh"
 $ id
 $ cat /root/root.txt
 ```
-![Desktop View](/assets/root_ganing.png)
+![Desktop View](/CTFs/assets/simple-ctf-thm-walkthrough/root_ganing.png)
 
 *Q7: What can you leverage to spawn a privileged shell?*
 

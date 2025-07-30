@@ -10,7 +10,7 @@ I’ve been learning ethical hacking for almost three months now, and the journe
 
 
 ## Simple CTF
-![Desktop View](/assets/first_ctf.png)
+![Desktop View](\assets\simple-ctf-thm-walkthrough)
 
 Today, we're diving into a Linux machine in a Capture The Flag (CTF) style challenge.
 This exercise involves not only gaining initial access but also performing privilege escalation to reach root-level access.
